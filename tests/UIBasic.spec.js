@@ -1,5 +1,25 @@
 const { test, expect } = require('@playwright/test');
 
+test.only('Client App login', async({ page }) => {
+
+    const productName = 'Zara Coat 3';
+    const products = page.locator(".card-body");
+    await page.goto('http://rahulshettyacademy.com/client');
+    await page.locator("#userEmail").fill("anshika@gmail.com");
+    await page.locator("#userPassword").type("Iamking@000");
+    await page.locator("[value='Login']").click();
+    await page.waitForLoadState('networkidle');
+    const titles = await page.locator(".card-body b").allTextContents();
+    console.log(titles);
+    const count = await products.count();
+    for (let i = 0; i < count; ++i) {
+        products.nth(i)
+    }
+    //Zara Coat 3
+
+
+})
+
 
 test('Browser Context Playwrhight test', async({ browser }) => {
 
@@ -40,7 +60,7 @@ test('Browser Context Playwrhight test', async({ browser }) => {
 
 });
 
-test.only('UI controls Test', async({ page }) => {
+test('UI controls Test', async({ page }) => {
     await page.goto('http://rahulshettyacademy.com/loginpagePractise/');
 
     const userName = page.locator('#username');
@@ -65,5 +85,28 @@ test.only('UI controls Test', async({ page }) => {
 
     //assertion
     //await page.pause();
+
+});
+
+test('Child windows handle Test', async({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
+    const userName = page.locator('#username');
+
+    await page.goto('http://rahulshettyacademy.com/loginpagePractise/');
+    const documentLink = page.locator("[href*='documents-request']");
+
+    const [newPage] = await Promise.all([
+        context.waitForEvent('page'),
+        documentLink.click(),
+    ])
+    const text = await newPage.locator(".red").textContent();
+    //console.log(text);
+    const arrayText = text.split("@");
+    const domain = arrayText[1].split(" ")[0];
+    //console.log(domain);
+    await page.locator("#username").type(domain);
+    console.log(await page.locator("#username").textContent());
+
 
 });
