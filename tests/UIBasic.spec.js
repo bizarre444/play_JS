@@ -25,6 +25,22 @@ test.only('Client App login', async({ page }) => {
 
     const bool = await page.locator("h3:has-text('zara coat 3')").isVisible();
     expect(bool).toBeTruthy();
+
+    await page.locator("text=Checkout").click();
+    await page.locator("[placeholder*='Country']").type("ind", { delay: 600 });
+    const dropdown = page.locator(".ta-results");
+    await dropdown.waitFor();
+    const optionsCount = await dropdown.locator("button").count();
+    for (let i = 0; i < optionsCount; i++) {
+        const text = await dropdown.locator("button").nth(i).textContent();
+        if (text.trim() === "India") {
+            await dropdown.locator("button").nth(i).click();
+            break;
+        }
+    }
+
+
+
     await page.pause();
     //Zara Coat 3
 
