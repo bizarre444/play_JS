@@ -2,7 +2,7 @@ const { test, expect } = require('@playwright/test');
 
 test.only('Client App login', async({ page }) => {
 
-    const productName = 'Zara Coat 3';
+    const productName = 'zara coat 3';
     const products = page.locator(".card-body");
     await page.goto('http://rahulshettyacademy.com/client');
     await page.locator("#userEmail").fill("anshika@gmail.com");
@@ -13,8 +13,19 @@ test.only('Client App login', async({ page }) => {
     console.log(titles);
     const count = await products.count();
     for (let i = 0; i < count; ++i) {
-        products.nth(i)
+        if (await products.nth(i).locator("b").textContent() === productName) {
+            //add to cart
+            await products.nth(i).locator("text= Add to Cart").click();
+            break;
+        }
     }
+
+    await page.locator("[routerlink*='cart']").click();
+    await page.locator("div li").first().waitFor();
+
+    const bool = await page.locator("h3:has-text('zara coat 3')").isVisible();
+    expect(bool).toBeTruthy();
+    await page.pause();
     //Zara Coat 3
 
 
