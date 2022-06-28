@@ -5,6 +5,7 @@ test.only('Client App login', async({ page }) => {
     const productName = 'zara coat 3';
     const products = page.locator(".card-body");
     await page.goto('http://rahulshettyacademy.com/client');
+    const email = "anshika@gmail.com";
     await page.locator("#userEmail").fill("anshika@gmail.com");
     await page.locator("#userPassword").type("Iamking@000");
     await page.locator("[value='Login']").click();
@@ -33,15 +34,36 @@ test.only('Client App login', async({ page }) => {
     const optionsCount = await dropdown.locator("button").count();
     for (let i = 0; i < optionsCount; i++) {
         const text = await dropdown.locator("button").nth(i).textContent();
-        if (text.trim() === "India") {
+        if (text === " India") {
             await dropdown.locator("button").nth(i).click();
             break;
         }
     }
 
+    await expect(page.locator(".user__name [type='text']").first()).toHaveText(email);
+    await page.locator(".action__submit").click();
+    await expect(page.locator(".hero-primary")).toHaveText(" Thankyou for the order. ");
+    const orderId = await page.locator(".em-spacer-1 .ng-star-inserted").textContent();
+    console.log(orderId);
+
+    await page.locator("button[routerlink*='myorders']").click();
+    await page.locator("tbody").waitFor();
+
+    const rows = await page.locator("tbody tr");
 
 
-    await page.pause();
+    for (let i = 0; i < await rows.count(); ++i) {
+        const rowOrderId = await rows.nth(i).locator("th").textContent();
+        if (orderId.includes(rowOrderId)) {
+            await rows.nth(i).locator("button").first().click();
+            break;
+        }
+    }
+
+    const orderIdDetails = await page.locator(".col-text").textContent();
+    expect(orderId.includes(orderIdDetails)).toBeTruthy();
+
+    //await page.pause();
     //Zara Coat 3
 
 
