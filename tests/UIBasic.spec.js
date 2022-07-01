@@ -5,9 +5,9 @@ test.only('Client App login', async({ page }) => {
     const productName = 'zara coat 3';
     const products = page.locator(".card-body");
     await page.goto('http://rahulshettyacademy.com/client');
-    const email = "anshika@gmail.com";
-    await page.locator("#userEmail").fill("anshika@gmail.com");
-    await page.locator("#userPassword").type("Iamking@000");
+    const email = "qa.parent2021@gmail.com";
+    await page.locator("#userEmail").fill("qa.parent2021@gmail.com");
+    await page.locator("#userPassword").type("123456QA!q");
     await page.locator("[value='Login']").click();
     await page.waitForLoadState('networkidle');
     const titles = await page.locator(".card-body b").allTextContents();
