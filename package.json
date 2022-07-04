@@ -1,21 +1,23 @@
 {
-  "name": "js_playwright",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/bizarre444/play_JS.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/bizarre444/play_JS/issues"
-  },
-  "homepage": "https://github.com/bizarre444/play_JS#readme",
-  "devDependencies": {
-    "@playwright/test": "^1.22.2"
-  }
+    "name": "js_playwright",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "npx playwright test tests/WebAPIPart1.spec.js --headed"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bizarre444/play_JS.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/bizarre444/play_JS/issues"
+    },
+    "homepage": "https://github.com/bizarre444/play_JS#readme",
+    "devDependencies": {
+        "@playwright/test": "^1.22.2"
+    }
 }

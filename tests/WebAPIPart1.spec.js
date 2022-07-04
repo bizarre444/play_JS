@@ -9,12 +9,9 @@ test.beforeAll(async() => {
     const apiContext = await request.newContext();
     const apiUtils = new APIUtils(apiContext, loginPayLoad);
     response = await apiUtils.createOrder(orderPayload);
-
 });
 
-test.beforeEach(() => {
-
-})
+test.beforeEach(() => {})
 
 //create order is success
 test.only('Place the order', async({ page }) => {
