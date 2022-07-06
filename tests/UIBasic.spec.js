@@ -1,6 +1,6 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect, request } = require('@playwright/test');
 
-test.only('Client App login', async({ page }) => {
+test('Client App login', async({ page }) => {
 
     const productName = 'zara coat 3';
     const products = page.locator(".card-body");
@@ -70,16 +70,19 @@ test.only('Client App login', async({ page }) => {
 })
 
 
-test('Browser Context Playwrhight test', async({ browser }) => {
-
+test.only('Browser Context Playwrhight test', async({ browser }) => {
 
     const context = await browser.newContext();
     const page = await context.newPage();
-
+    //abort css code - for image - {jpg,png,jpeg}
+    await page.route('**/*.css', route => route.abort());
     const userName = page.locator('#username');
     const signIn = page.locator("#signInBtn");
     const cardTitles = page.locator(".card-body a");
 
+    //listener
+    page.on('request', request => console.log(request.url()));
+    page.on('response', response => console.log(response.url(), response.status()));
     await page.goto('http://rahulshettyacademy.com/loginpagePractise/');
     console.log(await page.title());
     //css, x path
