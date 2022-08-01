@@ -16,16 +16,16 @@ test.only('Client App login', async({ page }) => {
     await dashboardPage.searchProductAddCart(productName);
     await dashboardPage.navigateToCart();
 
-    const cartPage = poManager.getCartPage();
+    const cartPage = await poManager.getCartPage();
     await cartPage.VerifyProductIsDisplayed(productName);
     await cartPage.Checkout();
 
-    const ordersReviewPage = poManager.getOrdersReviewPage();
+    const ordersReviewPage = await poManager.getOrdersReviewPage();
     await ordersReviewPage.searchCountryAndSelect("ind", "India");
     const orderId = await ordersReviewPage.SubmitAndGetOrderId();
     console.log(orderId);
     await dashboardPage.navigateToOrders();
-    const ordersHistoryPage = poManager.getOrdersHistoryPage();
+    const ordersHistoryPage = await poManager.getOrdersHistoryPage();
     await ordersHistoryPage.searchOrderAndSelect(orderId);
     expect(orderId.includes(await ordersHistoryPage.getOrderId())).toBeTruthy();
 
