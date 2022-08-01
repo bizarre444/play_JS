@@ -14,6 +14,7 @@ for (const data of dataSet) {
         await loginPage.goTO();
         await loginPage.validLogin(data.username, data.password);
         const dashboardPage = await poManager.getDashboardPage();
+        console.log(data.productName);
         await dashboardPage.searchProductAddCart(data.productName);
         await dashboardPage.navigateToCart();
 
