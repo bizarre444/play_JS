@@ -70,7 +70,7 @@ test('Client App login', async({ page }) => {
 })
 
 
-test.only('Browser Context Playwrhight test', async({ browser }) => {
+test('@Web Browser Context Playwrhight test', async({ browser }) => {
 
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -103,7 +103,6 @@ test.only('Browser Context Playwrhight test', async({ browser }) => {
         signIn.click(),
     ]);
 
-
     // console.log(await cardTitles.first().textContent());
     // console.log(await cardTitles.nth(1).textContent());
     const allTitles = await cardTitles.allTextContents();
@@ -112,7 +111,7 @@ test.only('Browser Context Playwrhight test', async({ browser }) => {
 
 });
 
-test('UI controls Test', async({ page }) => {
+test('@Web UI controls Test', async({ page }) => {
     await page.goto('http://rahulshettyacademy.com/loginpagePractise/');
 
     const userName = page.locator('#username');

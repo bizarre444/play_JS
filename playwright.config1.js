@@ -3,6 +3,8 @@ const { devices } = require('@playwright/test');
 
 const config = {
     testDir: './tests',
+    retries: 1,
+    workers: 3,
     /* Maximum time one test can run for. */
     timeout: 30 * 1000,
     expect: {
@@ -30,7 +32,7 @@ const config = {
                 permissions: ['geolocation'],
                 trace: 'on', //off, on
                 //...devices['Nokia N9']
-                viewport: { width: 720, height: 720 }
+                //viewport: { width: 720, height: 720 }
             },
         }
 

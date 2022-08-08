@@ -1,6 +1,9 @@
 const { test, expect } = require("@playwright/test");
 
-test("Popup validations", async({ page }) => {
+//test.describe.configure({ mode: 'parallel' });
+test.describe.configure({ mode: 'serial' });
+
+test("@Web Popup validations", async({ page }) => {
     await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
     // await page.goto("http://google.com");
     // await page.goBack();
@@ -10,10 +13,10 @@ test("Popup validations", async({ page }) => {
     await page.locator("#hide-textbox").click();
     await expect(page.locator("#displayed-text")).toBeHidden();
 
-    await page.pause();
+    //await page.pause();
     page.on('dialog', dialog => dialog.accept());
     await page.locator("#confirmbtn").click();
-    await page.pause();
+    //await page.pause();
 
     await page.locator("#mousehover").hover();
 
@@ -32,7 +35,7 @@ test("Screenshot & Visual comparition", async({ page }) => {
     await expect(page.locator("#displayed-text")).toBeHidden();
 });
 //screenshot - store -> screenshot -> 
-test.only('Visual', async({ page }) => {
+test('Visual', async({ page }) => {
     await page.goto("https://google.com/");
     expect(await page.screenshot()).toMatchSnapshot('landing.png');
 })

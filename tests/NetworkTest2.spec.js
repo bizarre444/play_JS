@@ -1,5 +1,5 @@
 const { test, expect, request } = require('@playwright/test');
-const { APIUtils } = require('./utils/APIUtils')
+const { APIUtils } = require('../utils/APIUtils')
 const loginPayLoad = { userEmail: "qa.parent22@gmail.com", userPassword: "Iamking@00" };
 const orderPayload = { orders: [{ country: "Cuba", productOrderedId: "6262e95ae26b7e1a10e89bf0" }] };
 const fakePayLoadOrders = { data: [], message: "No Orders" };
@@ -15,7 +15,7 @@ test.beforeAll(async() => {
 test.beforeEach(() => {})
 
 //create order is success
-test('Place the order', async({ page }) => {
+test('@API Place the order', async({ page }) => {
 
     page.addInitScript(value => {
         window.localStorage.setItem("token", value);

@@ -5,7 +5,7 @@ const { POManager } = require('../pageobjects/POManager');
 const dataSet = JSON.parse(JSON.stringify(require("../utils/placeorderTestData.json")));
 
 for (const data of dataSet) {
-    test(`Client App login for ${data.productName}`, async({ page }) => {
+    test(`@Web Client App login for ${data.productName}`, async({ page }) => {
         //js file - Login js, DashboardPage
         const poManager = new POManager(page);
         const products = page.locator(".card-body");
@@ -34,7 +34,7 @@ for (const data of dataSet) {
     });
 }
 
-customtest.only(`Client App login`, async({ page, testDataForOrder }) => {
+customtest(`Client App login`, async({ page, testDataForOrder }) => {
     //js file - Login js, DashboardPage
     const poManager = new POManager(page);
     const products = page.locator(".card-body");
