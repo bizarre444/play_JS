@@ -16,10 +16,10 @@ const config = {
             name: 'safari',
             use: {
                 browserName: 'webkit',
-                headless: false,
+                headless: true,
                 screenshot: 'on',
                 trace: 'retain-on-failure', //off, on
-                ...devices['iPhone 11']
+                //...devices['iPhone 11']
             },
         }, {
             name: 'chrome',
